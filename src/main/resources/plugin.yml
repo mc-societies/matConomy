@@ -1,0 +1,5 @@
+ name: rConomy
+ version: 0.1
+ author: Max Ammann
+ website: https://github.com/maxammann
+ loadbefore: [ Vault ]
