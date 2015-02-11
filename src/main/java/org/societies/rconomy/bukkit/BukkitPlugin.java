@@ -2,6 +2,8 @@ package org.societies.rconomy.bukkit;
 
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.ServicePriority;
+import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.societies.rconomy.Currency;
 import org.societies.rconomy.Economy;
@@ -51,6 +53,12 @@ public class BukkitPlugin extends JavaPlugin {
         }
 
         economy = new BukkitItemEconomy(getServer(), currency);
+
+
+        ServicesManager services = getServer().getServicesManager();
+
+        getLogger().info("[Economy] Enabling Vault support...");
+        services.register(net.milkbowl.vault.economy.Economy.class, new VaultEconomy(economy), this, ServicePriority.Lowest);
     }
 
     public Economy getEconomy() {
