@@ -14,7 +14,13 @@ public class Currency {
     }
 
     public double getValue(int id, short damage) {
-        return currencies.get(new CurrencyItem(id, damage));
+        Double value = currencies.get(new CurrencyItem(id, damage));
+
+        if (value == null) {
+            return 0;
+        }
+
+        return value;
     }
 
     public Map<CurrencyItem, Double> getCurrencies() {
