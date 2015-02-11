@@ -6,7 +6,9 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.societies.rconomy.*;
+import org.societies.rconomy.CurrencyItem;
+import org.societies.rconomy.Economy;
+import org.societies.rconomy.Response;
 
 import java.util.*;
 
@@ -131,7 +133,7 @@ public class BukkitItemEconomy implements Economy {
     }
 
     private void addItem(CurrencyItem currencyItem, Player player) {
-        ItemStack item = new ItemStack(currencyItem.id, 1, currencyItem.damage);
+        ItemStack item = new ItemStack(currencyItem.getID(), 1, currencyItem.getDamage());
 
         HashMap<Integer, ItemStack> noFit = player.getInventory().addItem(item);
 

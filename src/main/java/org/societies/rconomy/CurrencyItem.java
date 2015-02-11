@@ -32,4 +32,12 @@ public final class CurrencyItem {
         result = 31 * result + (int) damage;
         return result;
     }
+
+    public short getDamage() {
+        return damage;
+    }
+
+    public int getID() {
+        return id;
+    }
 }
