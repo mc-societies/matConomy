@@ -3,3 +3,5 @@
  author: Max Ammann
  website: https://github.com/maxammann
  loadbefore: [ Vault ]
+
+ main: org.societies.rconomy.bukkit.BukkitPlugin

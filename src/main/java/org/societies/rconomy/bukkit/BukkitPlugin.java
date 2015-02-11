@@ -21,6 +21,9 @@ public class BukkitPlugin extends JavaPlugin {
 
         FileConfiguration config = getConfig();
 
+        config.options().copyDefaults(true);
+        saveConfig();
+
         ConfigurationSection section = config.getConfigurationSection("currencies");
 
         if (section == null) {
