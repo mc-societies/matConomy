@@ -1,6 +1,5 @@
 package org.societies.rconomy.bukkit;
 
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.ServicesManager;
@@ -8,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.societies.rconomy.Currency;
 import org.societies.rconomy.Economy;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,30 +26,27 @@ public class BukkitPlugin extends JavaPlugin {
         config.options().copyDefaults(true);
         saveConfig();
 
-        ConfigurationSection section = config.getConfigurationSection("currencies");
+        List<Map<?, ?>> rawValues = config.getMapList("currencies");
 
-        if (section == null) {
+        if (rawValues == null) {
             return;
         }
 
-        Map<String, Object> rawValues = section.getValues(true);
-
-        for (Map.Entry<String, Object> entry : rawValues.entrySet()) {
-            String[] parts = entry.getKey().split(":");
-
+        for (Map<?, ?> map : rawValues) {
             int id;
             short damage = 0;
+            double value;
 
-            if (parts.length == 1) {
-                id = Integer.parseInt(parts[0]);
-            } else if (parts.length == 2) {
-                id = Integer.parseInt(parts[0]);
-                damage = Short.parseShort(parts[1]);
-            } else {
-                continue;
+            Object rawDamage = map.get("damage");
+
+            if (rawDamage != null) {
+                damage = ((Number) rawDamage).shortValue();
             }
 
-            currency.add(id, damage, ((Number) entry.getValue()).doubleValue());
+            id = ((Number) map.get("id")).intValue();
+            value = ((Number) map.get("value")).doubleValue();
+
+            currency.add(id, damage,value);
         }
 
         economy = new BukkitItemEconomy(getServer(), currency);
