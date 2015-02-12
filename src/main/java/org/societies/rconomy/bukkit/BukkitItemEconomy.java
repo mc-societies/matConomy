@@ -48,8 +48,8 @@ public class BukkitItemEconomy implements Economy {
         return getSingleValue(itemStack) * itemStack.getAmount();
     }
 
-    private List<IndexInfo> sortedInfos(ItemStack[] itemStacks) {
-        ArrayList<IndexInfo> info = new ArrayList<IndexInfo>();
+    private List<IndexInfo> indices(ItemStack[] itemStacks) {
+        ArrayList<IndexInfo> info = new ArrayList<IndexInfo>(itemStacks.length);
 
         for (int i = 0, length = itemStacks.length; i < length; i++) {
             ItemStack item = itemStacks[i];
@@ -67,8 +67,6 @@ public class BukkitItemEconomy implements Economy {
             info.add(new IndexInfo(i, current, item.getAmount()));
         }
 
-        Collections.sort(info);
-
         return info;
     }
 
@@ -84,7 +82,9 @@ public class BukkitItemEconomy implements Economy {
     }
 
     public double withdrawInventory(ItemStack[] contents, final double value) {
-        List<IndexInfo> info = sortedInfos(contents);
+        List<IndexInfo> info = indices(contents);
+        Collections.sort(info);
+
 
         double left = value;
 
@@ -129,6 +129,7 @@ public class BukkitItemEconomy implements Economy {
 
             previous = indexInfo;
         }
+
         return previous;
     }
 
@@ -148,6 +149,18 @@ public class BukkitItemEconomy implements Economy {
     }
 
     private Response deposit(Player player, double value) {
+        ArrayList<CurrencyItem> items = new ArrayList<CurrencyItem>();
+
+        double actual = items(value, items);
+
+        for (CurrencyItem item : items) {
+            addItem(item, player);
+        }
+
+        return new Response(value - actual, true);
+    }
+
+    private double items(double value, List<CurrencyItem> items) {
         double previous = Double.NaN;
 
         double left = value;
@@ -158,7 +171,8 @@ public class BukkitItemEconomy implements Economy {
 
                 if (left >= v) {
                     CurrencyItem key = sorted.getKey();
-                    addItem(key, player);
+
+                    items.add(key);
 
                     left -= v;
                 }
@@ -172,7 +186,7 @@ public class BukkitItemEconomy implements Economy {
             previous = left;
         }
 
-        return new Response(value - left, true);
+        return left;
     }
 
     @Override
@@ -228,23 +242,49 @@ public class BukkitItemEconomy implements Economy {
     }
 
     @Override
-    public boolean has(UUID uuid, double value) {
-        return getBalance(uuid) > value;
+    public boolean has(UUID player, double value) {
+        return getBalance(player) > value;
     }
 
     @Override
     public String format(double value) {
-        return Double.toString(value);
+        ArrayList<CurrencyItem> items = new ArrayList<CurrencyItem>();
+        items(value, items);
+
+        StringBuilder format = new StringBuilder();
+
+        for (CurrencyItem item : items) {
+            format.append(item.getID());
+        }
+
+        return format.toString();
     }
 
     @Override
-    public String plural() {
-        return "Coins";
-    }
+    public String format(UUID uuid) {
+        Player player = server.getPlayer(uuid);
 
-    @Override
-    public String singular() {
-        return "Coin";
-    }
+        if (player == null) {
+            return "Nothing";
+        }
 
+        StringBuilder format = new StringBuilder();
+        ItemStack[] itemStacks = player.getInventory().getContents();
+
+        for (ItemStack item : itemStacks) {
+            if (item == null) {
+                continue;
+            }
+
+            double current = getSingleValue(item);
+
+            if (current == 0) {
+                continue;
+            }
+
+            format.append(item.getTypeId());
+        }
+
+        return format.toString();
+    }
 }

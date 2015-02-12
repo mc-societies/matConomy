@@ -1,7 +1,26 @@
- name: rConomy
- version: 0.1
- author: Max Ammann
- website: https://github.com/maxammann
- loadbefore: [ Vault ]
+name: rConomy
+version: 0.1
+author: Max Ammann
+website: https://github.com/maxammann
+loadbefore: [ Vault ]
 
- main: org.societies.rconomy.bukkit.BukkitPlugin
+main: org.societies.rconomy.bukkit.BukkitPlugin
+
+commands:
+  rconomy:
+    description: Main command
+    aliases: [money]
+    usage: |
+       Example: /money /rconomy - Show your current balance
+       Example: /rconomy reload - Reload the plugin
+
+
+permissions:
+  rconomy.*:
+    children:
+      rconomy.money: true
+      rconomy.reload: true
+  rconomy.money:
+     default: true
+  rconomy.reload:
+     default: true

@@ -48,12 +48,12 @@ public class VaultEconomy extends AbstractEconomy {
 
     @Override
     public String currencyNamePlural() {
-        return economy.plural();
+        return "";
     }
 
     @Override
     public String currencyNameSingular() {
-        return economy.singular();
+        return "";
     }
 
     @Override

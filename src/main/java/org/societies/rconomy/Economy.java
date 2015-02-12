@@ -7,18 +7,16 @@ import java.util.UUID;
  */
 public interface Economy {
 
-    double getBalance(UUID uuid);
+    double getBalance(UUID player);
 
-    boolean has(UUID uuid, double value);
+    boolean has(UUID player, double value);
 
-    Response withdraw(UUID uuid, double value);
+    Response withdraw(UUID player, double value);
 
-    Response deposit(UUID uuid, double value);
+    Response deposit(UUID player, double value);
 
 
     String format(double value);
 
-    String plural();
-
-    String singular();
+    String format(UUID player);
 }

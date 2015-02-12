@@ -1,6 +1,9 @@
 package org.societies.rconomy.bukkit;
 
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -56,6 +59,42 @@ public class BukkitPlugin extends JavaPlugin {
 
         getLogger().info("[Economy] Enabling Vault support...");
         services.register(net.milkbowl.vault.economy.Economy.class, new VaultEconomy(economy), this, ServicePriority.Lowest);
+    }
+
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (args.length == 0) {
+            if (!(sender instanceof Player)) {
+                sender.sendMessage("Only players can have money, fucker ;)!");
+                return true;
+            }
+
+            if (!sender.hasPermission("rconomy.money")) {
+                sender.sendMessage("Insufficient permission!");
+                return true;
+            }
+
+            sender.sendMessage(economy.format(((Player) sender).getUniqueId()));
+            return true;
+        }
+
+        if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
+
+            if (!sender.hasPermission("rconomy.reload")) {
+                sender.sendMessage("Insufficient permission!");
+                return true;
+            }
+
+            sender.sendMessage("Reloading AK-47! Please wait patiently...");
+            reloadConfig();
+            onLoad();
+            return true;
+        }
+
+        sender.sendMessage("Command not found!");
+
+        return true;
     }
 
     public Economy getEconomy() {
