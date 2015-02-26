@@ -1,26 +1,26 @@
-name: rConomy
+name: matConomy
 version: 0.1
 author: Max Ammann
 website: https://github.com/maxammann
 loadbefore: [ Vault ]
 
-main: org.societies.rconomy.bukkit.BukkitPlugin
+main: org.societies.matconomy.bukkit.BukkitPlugin
 
 commands:
   rconomy:
     description: Main command
     aliases: [money]
     usage: |
-       Example: /money /rconomy - Show your current balance
-       Example: /rconomy reload - Reload the plugin
+       Example: /money - Show your current balance
+       Example: /matconomy reload - Reload the plugin
 
 
 permissions:
-  rconomy.*:
+  matconomy.*:
     children:
-      rconomy.money: true
-      rconomy.reload: true
-  rconomy.money:
+      matconomy.money: true
+      matconomy.reload: true
+  matconomy.money:
      default: true
-  rconomy.reload:
+  matconomy.reload:
      default: true

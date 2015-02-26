@@ -28,7 +28,7 @@ public class VaultEconomy extends AbstractEconomy {
 
     @Override
     public String getName() {
-        return "rConomy";
+        return "matConomy";
     }
 
     @Override

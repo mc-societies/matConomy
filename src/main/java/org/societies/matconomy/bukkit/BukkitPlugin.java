@@ -70,7 +70,7 @@ public class BukkitPlugin extends JavaPlugin {
                 return true;
             }
 
-            if (!sender.hasPermission("rconomy.money")) {
+            if (!sender.hasPermission("matconomy.money")) {
                 sender.sendMessage("Insufficient permission!");
                 return true;
             }
@@ -81,7 +81,7 @@ public class BukkitPlugin extends JavaPlugin {
 
         if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
 
-            if (!sender.hasPermission("rconomy.reload")) {
+            if (!sender.hasPermission("matconomy.reload")) {
                 sender.sendMessage("Insufficient permission!");
                 return true;
             }
