@@ -1,4 +1,4 @@
-package org.societies.rconomy.bukkit;
+package org.societies.matconomy.bukkit;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -7,8 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.societies.rconomy.Currency;
-import org.societies.rconomy.Economy;
+import org.societies.matconomy.Currency;
+import org.societies.matconomy.Economy;
 
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package org.societies.rconomy;
+package org.societies.matconomy;
 
 /**
 * Represents a CurrencyItem

@@ -1,4 +1,4 @@
-package org.societies.rconomy.bukkit;
+package org.societies.matconomy.bukkit;
 
 /**
 * Represents a IndexInfo

@@ -1,4 +1,4 @@
-package org.societies.rconomy.bukkit;
+package org.societies.matconomy.bukkit;
 
 import org.bukkit.Location;
 import org.bukkit.Server;
@@ -6,19 +6,19 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.societies.rconomy.CurrencyItem;
-import org.societies.rconomy.Economy;
-import org.societies.rconomy.Response;
+import org.societies.matconomy.CurrencyItem;
+import org.societies.matconomy.Economy;
+import org.societies.matconomy.Response;
 
 import java.util.*;
 
 public class BukkitItemEconomy implements Economy {
 
     private final Server server;
-    private final org.societies.rconomy.Currency currency;
+    private final org.societies.matconomy.Currency currency;
     private ArrayList<Map.Entry<CurrencyItem, Double>> sortedCurrencies;
 
-    public BukkitItemEconomy(Server server, org.societies.rconomy.Currency currency) {
+    public BukkitItemEconomy(Server server, org.societies.matconomy.Currency currency) {
         this.server = server;
         this.currency = currency;
 

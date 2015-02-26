@@ -1,10 +1,10 @@
-package org.societies.rconomy.bukkit;
+package org.societies.matconomy.bukkit;
 
 import net.milkbowl.vault.economy.AbstractEconomy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
-import org.societies.rconomy.Economy;
-import org.societies.rconomy.Response;
+import org.societies.matconomy.Economy;
+import org.societies.matconomy.Response;
 
 import java.util.Collections;
 import java.util.List;

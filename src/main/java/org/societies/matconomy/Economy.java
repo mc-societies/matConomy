@@ -1,4 +1,4 @@
-package org.societies.rconomy;
+package org.societies.matconomy;
 
 import java.util.UUID;
 
